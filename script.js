@@ -37,11 +37,14 @@ function showAxes(ctx,axes) {
     ctx.save();
 }
 
-function drawWave(amp, frec,){
+//no puedo pintar varias 
+function drawWave(amp, frec,color){
     let canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;     // equals window dimension
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext("2d");
+    ctx.restore();
+    
     
     ctx.lineJoin="miter";
     
@@ -51,14 +54,14 @@ function drawWave(amp, frec,){
 
     ctx.beginPath();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgb(66,44,255)";
+    //ctx.strokeStyle = "rgb(66,44,255)";
+    ctx.strokeStyle = color;
 
     var x = 0;
     var y = 0;
     var amplitude = amp;
     var frequency = frec;
 
-    console.log(width);
     while (x < width) {
         //y = A sen(frec)
         y =  height/2 + amplitude * Math.sin(x/frequency);
@@ -66,14 +69,32 @@ function drawWave(amp, frec,){
         x = x + 1;
     }
     ctx.stroke();
-    ctx.save();
-    //showAxes(ctx);
+    //ctx.save();
+    
+    //esto es cutre de cojones, como consigo que se quede?
+    showAxes(ctx);
     return ctx;
 }
 
+//i take the input forms data and use it to invoke drawWave
+function waveSetup(){
+    //hay que comporbar nulls
+    var frec = document.querySelector('[name="frecuency-value"]').value;
+    var amp = document.querySelector('[name="amplitude-value"]').value
+    var color = document.querySelector('[name="color"]').value
+
+    if(frec == "" || amp == ""){
+        frec = 40;
+        amp = 40;
+    }
+    console.log(color);
+    drawWave(amp, frec,color);
+}
 
 function drawCanvas(){
-    var canvas = document.getElementById("canvas");
+    let canvas = document.getElementById("canvas");
+    canvas.width = window.innerWidth;     // equals window dimension
+    canvas.height = window.innerHeight;
     var ctx = canvas.getContext("2d");
     showAxes(ctx);
 }
