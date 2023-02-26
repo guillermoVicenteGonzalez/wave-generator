@@ -1,0 +1,29 @@
+
+.grid-container{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(20%, 25%) minmax(60%, 80%);
+}
+
+/*
+.canvas-grid{
+    background-image: linear-gradient(#111 .1rem, transparent .1rem), linear-gradient(90deg, #111 .1rem, transparent .1rem);
+    background-size: 1rem 1rem;
+}
+*/
+#canvas{
+    align-self: center;
+
+    /*background-color: rgb(170, 170, 214);*/
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.control-panel > *{
+    display: inline-block !important;
+}
