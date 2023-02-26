@@ -41,7 +41,11 @@ function showAxes(ctx,axes) {
 function drawWave(amp, frec,color){
     let canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;     // equals window dimension
+    //canvas.width = 30;
     canvas.height = window.innerHeight;
+
+    console.log(canvas.width);
+    console.log(canvas.height);
     var ctx = canvas.getContext("2d");
     ctx.restore();
     
@@ -50,7 +54,7 @@ function drawWave(amp, frec,color){
     
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
-    var scale = 20;
+    var scale = 1000000000000;
 
     ctx.beginPath();
     ctx.lineWidth = 1;
@@ -61,12 +65,14 @@ function drawWave(amp, frec,color){
     var y = 0;
     var amplitude = amp;
     var frequency = frec * 2 * Math.PI;
-    console.log(frequency);
+    //var frequency = frec;    
     
     while (x < width) {
         //y = A sen(frec)
-        y =  height/2 +  amplitude * Math.sin(x/frequency);
+        // y =  height/2 +  amplitude * Math.sin(x * frequency);
+        y = height/2 + amplitude * Math.sin(x * frequency);
         ctx.lineTo(x, y);
+        console.log("x: " + x + " y: " + y);
         x = x + 1;
     }
     ctx.stroke();
