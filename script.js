@@ -60,11 +60,12 @@ function drawWave(amp, frec,color){
     var x = 0;
     var y = 0;
     var amplitude = amp;
-    var frequency = frec;
-
+    var frequency = frec * 2 * Math.PI;
+    console.log(frequency);
+    
     while (x < width) {
         //y = A sen(frec)
-        y =  height/2 + amplitude * Math.sin(x/frequency);
+        y =  height/2 +  amplitude * Math.sin(x/frequency);
         ctx.lineTo(x, y);
         x = x + 1;
     }
