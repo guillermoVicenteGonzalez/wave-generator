@@ -5,7 +5,7 @@ w = frecuencia
 o = fase
 
 # Por hacer
- - [x] redimensionar correctamente
+ - [ ] redimensionar correctamente
  - [ ] interfaz rediseñada
  - [ ] sumar ondas
  - [ ] sliders para modificar los valores de frecuencia
