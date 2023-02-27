@@ -1,3 +1,8 @@
+var canvas;
+var ctx;
+var canvasWidth;
+var canvasHeight;
+
 function test(){
     return "buenas tardes";
 }
@@ -18,6 +23,8 @@ function showAxes(ctx,axes) {
 
     var xMin = 0;
     
+    ctx.restore();
+
     ctx.beginPath();
     ctx.strokeStyle = "rgb(128,128,128)";
     
@@ -34,52 +41,48 @@ function showAxes(ctx,axes) {
     ctx.lineTo(0, height);
     
     ctx.stroke();
-    ctx.save();
+    //ctx.save();
 }
 
 //no puedo pintar varias 
 function drawWave(amp, frec,color){
-    let canvas = document.getElementById("canvas");
-    canvas.width = window.innerWidth;     // equals window dimension
-    //canvas.width = 30;
-    canvas.height = window.innerHeight;
+    //let canvas = document.getElementById("canvas");
+    //canvas.width = window.innerWidth;     // equals window dimension
+    //canvas.height = window.innerHeight;
 
-    console.log(canvas.width);
-    console.log(canvas.height);
-    var ctx = canvas.getContext("2d");
-    ctx.restore();
+
+    //var ctx = canvas.getContext("2d");
+    //ctx.restore();
     
     
     ctx.lineJoin="miter";
     
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
-    var scale = 1000000000000;
 
     ctx.beginPath();
-    ctx.lineWidth = 1;
-    //ctx.strokeStyle = "rgb(66,44,255)";
+    ctx.lineWidth = 2;
     ctx.strokeStyle = color;
+
 
     var x = 0;
     var y = 0;
     var amplitude = amp;
-    var frequency = frec * 2 * Math.PI;
+    var frequency = (frec * 2 * Math.PI)/canvas.width;
     //var frequency = frec;    
     
     while (x < width) {
-        //y = A sen(frec)
-        // y =  height/2 +  amplitude * Math.sin(x * frequency);
         y = height/2 + amplitude * Math.sin(x * frequency);
         ctx.lineTo(x, y);
         console.log("x: " + x + " y: " + y);
         x = x + 1;
     }
     ctx.stroke();
+    //ctx.closePath();
     //ctx.save();
     
     //esto es cutre de cojones, como consigo que se quede?
-    showAxes(ctx);
+    //showAxes(ctx);
     return ctx;
 }
 
@@ -98,14 +101,41 @@ function waveSetup(){
     drawWave(amp, frec,color);
 }
 
-function drawCanvas(){
-    let canvas = document.getElementById("canvas");
+function intializeCanvas(){
+    canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;     // equals window dimension
     canvas.height = window.innerHeight;
-    var ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
+    showAxes(ctx);
+    ctx.save();
+}
+
+function drawCanvas(){
+    console.log("drawing canvas");
+    //canvas.width = window.innerWidth;     // equals window dimension
+    //canvas.height = window.innerHeight;
+    //ctx = canvas.getContext("2d");
+    //ctx.restore();
     showAxes(ctx);
 }
-window.onload = drawCanvas;
 
+function resizeCanvas(){
+
+}
+
+function drawLine(){
+    ctx.beginPath();
+    ctx.strokeStyle = '#0000ff';
+    ctx.lineWidth = 5;
+    ctx.lineTo(0,0);
+    ctx.lineTo(1000,1000);
+    ctx.stroke();
+    ctx.save();
+}
+
+
+
+window.onload = intializeCanvas;
+window.onresize = drawCanvas;
 
 
