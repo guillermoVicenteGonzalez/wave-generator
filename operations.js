@@ -43,19 +43,19 @@ export function showAxes(ctx,axes) {
 }
 
 //no puedo pintar varias 
-export function drawWave(amp, frec,color){
+export function drawWave(amp, frec,color, myCanvas){
     //let canvas = document.getElementById("canvas");
     //canvas.width = window.innerWidth;     // equals window dimension
     //canvas.height = window.innerHeight;
 
-
-    //var ctx = canvas.getContext("2d");
+    console.log(myCanvas);
+    var ctx = myCanvas.getContext("2d");
     //ctx.restore();
-    console.log(ctx);
     ctx.lineJoin="miter";
     
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
+    console.log(width, height);
 
     ctx.beginPath();
     ctx.lineWidth = 2;
@@ -65,7 +65,7 @@ export function drawWave(amp, frec,color){
     var x = 0;
     var y = 0;
     var amplitude = amp;
-    var frequency = (frec * 2 * Math.PI)/canvas.width; 
+    var frequency = (frec * 2 * Math.PI)/myCanvas.width; 
     
     while (x < width) {
         y = height/2 + amplitude * Math.sin(x * frequency);
@@ -78,7 +78,7 @@ export function drawWave(amp, frec,color){
 }
 
 //i take the input forms data and use it to invoke drawWave
-export function waveSetup(){
+export function waveSetup(myCanvas){
     //hay que comporbar nulls
     var frec = document.querySelector('[name="frecuency-value"]').value;
     var amp = document.querySelector('[name="amplitude-value"]').value
@@ -88,8 +88,7 @@ export function waveSetup(){
         frec = 40;
         amp = 40;
     }
-    console.log(color);
-    drawWave(amp, frec,color);
+    return drawWave(amp, frec,color, myCanvas);
 }
 
 export function createWave(n, a, f){
@@ -103,7 +102,7 @@ export function createWave(n, a, f){
 }
 
 export function intializeCanvas(){
-    canvas = document.getElementById("canvas");
+    canvas = document.getElementById("mainCanvas");
     canvas.width = window.innerWidth;     // equals window dimension
     canvas.height = window.innerHeight;
     ctx = canvas.getContext("2d");
@@ -132,5 +131,25 @@ export function drawLine(){
     ctx.lineTo(1000,1000);
     ctx.stroke();
     ctx.save();
+}
+
+//seria mas modularizable pasandole como parametro el canvas
+export function clearContext(ctx){
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+    ctx.clearRect(0, 0, width, height);
+    
+}
+
+
+
+export function newCanvas(parent){
+    var newCanvas = document.createElement("canvas");
+    newCanvas.className = "canvas";
+    newCanvas.width = window.innerWidth;
+    newCanvas.height = window.innerHeight;
+    parent.appendChild(newCanvas);
+    console.log(newCanvas);
+    return newCanvas;
 }
 

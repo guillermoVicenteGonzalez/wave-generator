@@ -17,7 +17,8 @@
         
         <div class="grid-container">
             <div class="control-panel">
-                <button id="newCanvasBtn" class="openModal">new canvas</button>
+                <button id="newCanvasBtn" class="openModal defaultBtn">new canvas</button>
+                <button id="auxBtn" class="defaultBtn">Aux</button>
                 <input id="frecuency-input" type="number" name="frecuency-value">
                 <input id="amplitude-input" type="number" name="amplitude-value">
                 <select id="color-input" name="color">
@@ -28,9 +29,11 @@
                   </select>
             </div>
             
-            <canvas class="canvas-grid" id="canvas">
+            <div id="canvasWrapper">
+                <canvas class="canvas-grid canvas" id="mainCanvas">
 
-            </canvas>
+                </canvas>
+            </div>
         
 
         <!--
@@ -44,8 +47,8 @@
 
     <dialog class="dialogCard card" id="waveDialog">
         <div class="modalControls">
-            <button id="newWaveBtn">Accept</button>
-            <button class="closeModal">close</button>
+            <button id="newWaveBtn" class="defaultBtn">Accept</button>
+            <button class="closeModal defaultBtn">close</button>
         </div>
     </dialog>
 </body>
