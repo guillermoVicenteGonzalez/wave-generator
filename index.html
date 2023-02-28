@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
         
         <div class="grid-container">
             <div class="control-panel">
-                <button id="newCanvasBtn" onclick="waveSetup()">new canvas</button>
+                <button id="newCanvasBtn" class="openModal">new canvas</button>
                 <input id="frecuency-input" type="number" name="frecuency-value">
                 <input id="amplitude-input" type="number" name="amplitude-value">
                 <select id="color-input" name="color">
@@ -41,5 +41,12 @@
         -->
         </div>
     </content>
+
+    <dialog class="dialogCard card" id="waveDialog">
+        <div class="modalControls">
+            <button id="newWaveBtn">Accept</button>
+            <button class="closeModal">close</button>
+        </div>
+    </dialog>
 </body>
 </html>

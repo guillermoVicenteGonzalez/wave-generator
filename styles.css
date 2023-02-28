@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(20%, 25%) minmax(60%, 80%);
+    grid-template-columns: minmax(20%, 25%) minmax(60%, 70%);
 }
 
 /*
@@ -13,7 +13,6 @@
 }
 */
 #canvas{
-    border: solid 1px blue;  
     align-self: center;
     width: 100%;
     height: 100%;
@@ -28,4 +27,19 @@ body{
 
 .control-panel > *{
     display: inline-block !important;
+}
+
+.dialogCard{
+    width: 1400px;
+    height: 700px;
+    border: none;
+}
+
+.card{
+    border-radius: 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.modalControls{
+    text-align: center;
 }
