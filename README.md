@@ -1,8 +1,6 @@
-### Señal senoidal
-A sen (w t + o)
-A = amplitud
-w = frecuencia
-o = fase
+# Descripcion
+Sencillo simulador de ondas senoidales para uso educativo. 
+El simulador permite (permitirá) generar ondas senoidales parametrizables. Manejar sus atributos (frecuencia y amplitud), reproducir su sonido, fusionarlas con otras ondas etc.
 
 # Por hacer
  - [ ] redimensionar correctamente
@@ -17,3 +15,14 @@ o = fase
    - [ ] las operaciones y estructuras de graficos al modulo operations (rebautizar?)
    - [ ] definir que necesita la clase Wave (quizas guardar ahi el canvas que le corresponde?)
    - [ ] utilizar script para albergar los modulos, asignar funciones a los modulos y gestionar los elementos del DOM
+ - [ ] medidas realistas
+   - [ ] grid que muestre la escala
+      - [ ] dimensiones dinamicas
+   - [ ] animaciones realistas (1 Hz -> un ciclo por segundo)
+- [ ] reproduccion de audio.
+
+### Señal senoidal
+A sen (w t + o)
+A = amplitud
+w = frecuencia
+o = fase
