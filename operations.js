@@ -50,9 +50,11 @@ export function drawWave(amp, frec,color, myCanvas){
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
 
-    ctx.lineJoin="miter";
+    ctx.lineJoin="round";
+    ctx.lineCap="round";
+    ctx.filter= "blur(0px)";
     ctx.beginPath();
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.strokeStyle = color;
 
     var x = 0;
@@ -69,29 +71,6 @@ export function drawWave(amp, frec,color, myCanvas){
     return ctx;
 }
 
-//i take the input forms data and use it to invoke drawWave
-export function waveSetup(myCanvas){
-    //hay que comporbar nulls
-    var frec = document.querySelector('[name="frecuency-value"]').value;
-    var amp = document.querySelector('[name="amplitude-value"]').value
-    var color = document.querySelector('[name="color"]').value
-
-    if(frec == "" || amp == ""){
-        frec = 40;
-        amp = 40;
-    }
-    return drawWave(amp, frec,color, myCanvas);
-}
-
-export function createWave(n, a, f){
-    var wave = {
-        "name": n,
-        "amplitude":a,
-        "frequency":f
-    };
-
-    
-}
 
 export function intializeCanvas(){
     canvas = document.getElementById("mainCanvas");
@@ -153,8 +132,4 @@ export function newCanvas(parent){
 }
 
 
-export function redrawWave(){
-    var nFrec = document.querySelector("#frequency-slider");
-    var nAmp = document.querySelector("#amplitude-slider")
-}
 
