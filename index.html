@@ -19,14 +19,6 @@
             <div class="control-panel">
                 <button id="newCanvasBtn" class="openModal defaultBtn">new canvas</button>
                 <button id="auxBtn" class="defaultBtn">Aux</button>
-                <input id="frecuency-input" type="number" name="frecuency-value">
-                <input id="amplitude-input" type="number" name="amplitude-value">
-                <select id="color-input" name="color">
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    <option value="#ffff00">Yellow</option>
-                  </select>
             </div>
             
             <div id="canvasWrapper">
@@ -45,8 +37,18 @@
         </div>
     </content>
 
-    <dialog class="dialogCard card" id="waveDialog">
+    <dialog class="dialogCard card flexContainer" id="waveDialog">
+        <canvas id="previewCanvas"></canvas>
         <div class="modalControls">
+            <!--<input id="frecuency-input" type="number" name="frecuency-value">-->
+            <input type="range" min="1" max="100" value="2" class="slider" id="frequency-slider">
+            <input type="range" min="1" max="1000" value="100" class="slider" id="amplitude-slider">
+            <select id="color-input" name="color">
+                <option value="#0000ff">Blue</option>
+                <option value="#ff0000">Red</option>
+                <option value="#00ff00">Green</option>
+                <option value="#ffff00">Yellow</option>
+              </select>
             <button id="newWaveBtn" class="defaultBtn">Accept</button>
             <button class="closeModal defaultBtn">close</button>
         </div>

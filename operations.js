@@ -1,3 +1,5 @@
+import { Wave } from "./Wave.js";
+
 export var canvas;
 export var ctx;
 var canvasWidth;
@@ -44,23 +46,14 @@ export function showAxes(ctx,axes) {
 
 //no puedo pintar varias 
 export function drawWave(amp, frec,color, myCanvas){
-    //let canvas = document.getElementById("canvas");
-    //canvas.width = window.innerWidth;     // equals window dimension
-    //canvas.height = window.innerHeight;
-
-    console.log(myCanvas);
     var ctx = myCanvas.getContext("2d");
-    //ctx.restore();
-    ctx.lineJoin="miter";
-    
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
-    console.log(width, height);
 
+    ctx.lineJoin="miter";
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = color;
-
 
     var x = 0;
     var y = 0;
@@ -70,7 +63,6 @@ export function drawWave(amp, frec,color, myCanvas){
     while (x < width) {
         y = height/2 + amplitude * Math.sin(x * frequency);
         ctx.lineTo(x, y);
-        console.log("x: " + x + " y: " + y);
         x = x + 1;
     }
     ctx.stroke();
@@ -141,6 +133,13 @@ export function clearContext(ctx){
     
 }
 
+export function clearCanvas(canvas){
+    let ctx = canvas.getContext("2d");
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+    ctx.clearRect(0, 0, width, height);
+}
+
 
 
 export function newCanvas(parent){
@@ -151,5 +150,11 @@ export function newCanvas(parent){
     parent.appendChild(newCanvas);
     console.log(newCanvas);
     return newCanvas;
+}
+
+
+export function redrawWave(){
+    var nFrec = document.querySelector("#frequency-slider");
+    var nAmp = document.querySelector("#amplitude-slider")
 }
 
