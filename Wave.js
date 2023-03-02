@@ -48,7 +48,7 @@ class Wave{
         while (x < width) {
             y = height/2 + this.amplitude * Math.sin(x * frec);
             ctx.lineTo(x, y);
-            x = x + 1;
+            x++;
         }
         ctx.stroke();
     }
