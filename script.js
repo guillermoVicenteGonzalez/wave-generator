@@ -20,6 +20,10 @@ var amplitudeSlider = document.querySelector("#amplitude-slider")
 var colorSelector = document.querySelector('[name="color"]');
 var previewCanvas = document.querySelector("#previewCanvas");
 var newWaveBtn = document.querySelector("#newWaveBtn");
+var waveName = document.querySelector("#waveName");
+var tempWaveCard = document.querySelector("div[data-type='template']");
+
+//var tempWaveCard = document.querySelector(".waveCard");
 //var openWaveDialog = document.getElementById("openModalBtn");
 
 
@@ -35,6 +39,7 @@ openWaveDialog.addEventListener("click", ()=>{
     //ops.previewWave(dialogCanvas);
     ops.drawWave(100,2,"#0000ff",previewCanvas);
 });
+
 
 //cerrar modal
 closeWaveDialog.addEventListener("click",()=>{
@@ -55,23 +60,26 @@ acceptBtn.addEventListener("click",()=>{
 
 //boton de pruebas
 auxBtn.addEventListener("click",()=>{
-    //esto tiene que ir en una funcion parametrizable, pero es una prueba
-    var ctx = canvases[1].getContext("2d");
-    console.log(ctx);
-    ops.clearContext(ctx);
-    canvases[1] = null;
-    console.log(canvases);
+    ops.createWaveCard("guillermo");
 });
 
 //guardar onda de la preview
 newWaveBtn.addEventListener("click",()=>{
+    //y si ya existe una??
     let amp = amplitudeSlider.value;
     let frec = frequencySlider.value;
     let color = colorSelector.value;
-    let newWave = new Wave(amp,frec,color,"prueba1");
-    waves.set(newWave.getName(),newWave);
+    let name = waveName.value;
 
+    if(frec == null || amp == null || name == null || name == ""){
+        alert("fill all the fields");
+        return undefined;
+    }
+
+    let newWave = new Wave(amp,frec,color,name);
+    waves.set(newWave.getName(),newWave);
     //falta añadir la onda al selector de la izquierda.
+    ops.createWaveCard(newWave);
 
 
     waveDialog.close();
@@ -82,7 +90,12 @@ newWaveBtn.addEventListener("click",()=>{
     newWave.drawWave(tempCanvas);
 })
 
-
+/********
+ * Wave Card management
+ */
+tempWaveCard.addEventListener("click",()=>{
+    alert("hola");
+})
 
 /********************
  * Slider events
@@ -98,8 +111,9 @@ newWaveBtn.addEventListener("click",()=>{
 
 frequencySlider.addEventListener("input",redrawWave);
 amplitudeSlider.addEventListener("input",redrawWave);
+colorSelector.addEventListener("change",redrawWave);
 
 
 window.onload= ops.intializeCanvas;
-window.onresize = console.log(ops.canvas);
+window.onresize = console.log(ops.canvas);//resize all canvases
 

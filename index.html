@@ -16,15 +16,25 @@
     <content>
         
         <div class="grid-container">
-            <div class="control-panel flexContainer">
-                <div class="waveCard">
-                    <input type="checkbox">
-                    <canvas>
-
-                    </canvas>
-                </div>
+            <div class="control-panel">
                 <button id="newCanvasBtn" class="openModal defaultBtn">new canvas</button>
                 <button id="auxBtn" class="defaultBtn">Aux</button>
+                
+                <div class="flexContainer" id="cardContainer">
+                    <div class="waveCard" style="display: none;" data-type="template">
+                        <param>
+                        <input type="checkbox" class="customCheck">
+                        <div class="cardMidColumn">
+                            <canvas  class="canvas"></canvas>
+                            <!--<label style="background-color: green;"></label>-->
+                            <label></label>
+                        </div>
+
+                        <div class="playBtn"></div>
+                    </div>
+
+                </div>
+
             </div>
             
             <div id="canvasWrapper">
@@ -56,6 +66,7 @@
                     <option value="#00ff00">Green</option>
                     <option value="#ffff00">Yellow</option>
                 </select>
+                <input type="text" id="waveName" placeholder="name">
                 <button id="newWaveBtn" class="defaultBtn">Accept</button>
                 <button class="closeModal defaultBtn">close</button>
             </div>

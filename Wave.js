@@ -31,16 +31,23 @@ class Wave{
     deleteCanvas(){this.canvas.remove();}
 
     //cambiar a canvas
-    drawWave(canvas){
+    drawWave(canvas, brushSize){
         var ctx = canvas.getContext("2d");
         var width = ctx.canvas.width;
         var height = ctx.canvas.height;
+        console.log(width);
+        console.log(height);
         
         ctx.lineJoin="miter";
         ctx.beginPath();
-        ctx.lineWidth = 2;
+        if(!brushSize){
+            ctx.lineWidth = 2;
+        }else{
+            ctx.lineWidth = brushSize;
+        }
         ctx.strokeStyle = this.color;
         var frec = (this.frequency * 2 * Math.PI)/canvas.width;
+        //var amp = (this.amplitude)/height;
     
         var x = 0;
         var y = 0;
@@ -51,6 +58,37 @@ class Wave{
             x++;
         }
         ctx.stroke();
+    }
+    
+    //without scaling to canvas size
+    //deprecated. For testing
+    drawRawWave(canvas, brushSize){
+        var ctx = canvas.getContext("2d");
+        var width = ctx.canvas.width;
+        var height = ctx.canvas.height;
+        console.log("rawWave" + width, height);
+
+        ctx.lineJoin="miter";
+        ctx.beginPath();
+        if(!brushSize){
+            ctx.lineWidth = 2;
+        }else{
+            ctx.lineWidth = brushSize;
+        }
+        ctx.strokeStyle = this.color;
+        var frec = ((this.frequency * 2 * Math.PI)/width)/2;
+        var amp = (this.amplitude / height)/2;
+
+        var x = 0;
+        var y = 0;
+        
+        while (x < width) {
+            y = height/2 + this.amplitude * Math.sin(x * frec);
+            ctx.lineTo(x, y);
+            x++;
+        }
+        ctx.stroke();
+
     }
 }
 
