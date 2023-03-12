@@ -17,7 +17,7 @@
         
         <div class="grid-container">
             <div class="control-panel">
-                <button id="newCanvasBtn" class="openModal defaultBtn">new canvas</button>
+                <button id="createWaveBtn" class="openModal defaultBtn">create wave</button>
                 <button id="auxBtn" class="defaultBtn">Aux</button>
                 
                 <div class="flexContainer" id="cardContainer">
@@ -25,9 +25,9 @@
                         <param>
                         <input type="checkbox" class="customCheck">
                         <div class="cardMidColumn">
-                            <canvas  class="canvas"></canvas>
+                                <canvas style="max-height: 120px;"></canvas>
                             <!--<label style="background-color: green;"></label>-->
-                            <label></label>
+                            <label style="background-color: red;"></label>
                         </div>
 
                         <div class="playBtn"></div>
@@ -54,6 +54,7 @@
     </content>
 
     <dialog class="dialogCard card" id="waveDialog">
+        <object id="dialogParam">
         <div class="flexContainer">
             <canvas id="previewCanvas"></canvas>
             <div class="modalControls">

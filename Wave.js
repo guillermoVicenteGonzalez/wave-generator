@@ -23,20 +23,28 @@ class Wave{
     setFrequency(nF){this.frequency = nF;}
     getFrequency(){return this.frequency};
 
-    setColor(nC){this.color = nc;}
+    setColor(nC){this.color = nC;}
     getColor(){return this.color;}
 
     setCanvas(nCan){this.canvas = nCan;}
     getCanvas(){return this.canvas;}
     deleteCanvas(){this.canvas.remove();}
+    //hides or shows canvas deppending on its state
+    triggerCanvas(){
+        if(this.canvas.style.display == "none"){
+            this.canvas.style.display = "block";
+        }else{
+            this.canvas.style.display = "none";
+        }
+    }
 
     //cambiar a canvas
     drawWave(canvas, brushSize){
         var ctx = canvas.getContext("2d");
         var width = ctx.canvas.width;
         var height = ctx.canvas.height;
-        console.log(width);
-        console.log(height);
+        //console.log(width);
+        //console.log(height);
         
         ctx.lineJoin="miter";
         ctx.beginPath();

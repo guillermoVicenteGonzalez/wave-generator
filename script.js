@@ -8,7 +8,7 @@ var waves = new Map();
 /***********************
  * UI ELEMENTS
  ***********************/
-var newCanvasBtn = document.getElementById("newCanvasBtn");
+var createWaveBtn = document.getElementById("createWaveBtn");
 var waveDialog = document.getElementById("waveDialog");
 var openWaveDialog = document.querySelector(".openModal");
 var closeWaveDialog = document.querySelector(".closeModal");
@@ -22,6 +22,7 @@ var previewCanvas = document.querySelector("#previewCanvas");
 var newWaveBtn = document.querySelector("#newWaveBtn");
 var waveName = document.querySelector("#waveName");
 var tempWaveCard = document.querySelector("div[data-type='template']");
+var dialogParam = document.querySelector("#dialogParam");
 
 //var tempWaveCard = document.querySelector(".waveCard");
 //var openWaveDialog = document.getElementById("openModalBtn");
@@ -31,13 +32,20 @@ var tempWaveCard = document.querySelector("div[data-type='template']");
 /***************************
  * Click events
  **^************************/
-//abrir modal
-openWaveDialog.addEventListener("click", ()=>{
+
+
+createWaveBtn.addEventListener("click",()=>{
     waveDialog.showModal();
+    //esto esta mal, tienen que ser las dimensiones del div.
     previewCanvas.width = window.innerWidth;
     previewCanvas.height = window.innerHeight;
-    //ops.previewWave(dialogCanvas);
-    ops.drawWave(100,2,"#0000ff",previewCanvas);
+    let wave = new Wave(100,2,"#0000ff",undefined);
+    amplitudeSlider.value = wave.getAmplitude();
+    frequencySlider.value = wave.getFrequency();
+    colorSelector.value = wave.getColor();
+    dialogParam.value = wave;
+    console.log(dialogParam.value);
+    wave.drawWave(previewCanvas,2);
 });
 
 
@@ -47,24 +55,18 @@ closeWaveDialog.addEventListener("click",()=>{
 
 })
 
-//pintar onda
-/*deprecated
-acceptBtn.addEventListener("click",()=>{
-    waveDialog.close();
-    let parent = document.querySelector("#canvasWrapper");
-    let tempCanvas = ops.newCanvas(parent);
-    canvases.push(tempCanvas);
-    ops.waveSetup(tempCanvas);
-})
-*/
 
 //boton de pruebas
 auxBtn.addEventListener("click",()=>{
     ops.createWaveCard("guillermo");
 });
 
+
+
 //guardar onda de la preview
-newWaveBtn.addEventListener("click",()=>{
+//al pulsar boton accept del dialog
+newWaveBtn.addEventListener("click" ,()=>{
+    let newWave = dialogParam.value;
     //y si ya existe una??
     let amp = amplitudeSlider.value;
     let frec = frequencySlider.value;
@@ -76,9 +78,12 @@ newWaveBtn.addEventListener("click",()=>{
         return undefined;
     }
 
-    let newWave = new Wave(amp,frec,color,name);
+    newWave.setAmplitude(amp);
+    newWave.setFrequency(frec);
+    newWave.setColor(color);
+    newWave.setName(name);
+    //verificar nombre
     waves.set(newWave.getName(),newWave);
-    //falta añadir la onda al selector de la izquierda.
     ops.createWaveCard(newWave);
 
 
@@ -88,11 +93,13 @@ newWaveBtn.addEventListener("click",()=>{
     canvases.push(tempCanvas);
     //ops.waveSetup(tempCanvas); 
     newWave.drawWave(tempCanvas);
-})
+    newWave.setCanvas(tempCanvas);
+});
 
-/********
+
+/*********************************+++
  * Wave Card management
- */
+ ****************************/
 tempWaveCard.addEventListener("click",()=>{
     alert("hola");
 })
@@ -100,6 +107,8 @@ tempWaveCard.addEventListener("click",()=>{
 /********************
  * Slider events
  *********************/
+
+//deprecated, new version below
  function redrawWave(){
     //pilar valores
     let amp = amplitudeSlider.value;
@@ -109,11 +118,46 @@ tempWaveCard.addEventListener("click",()=>{
     ops.drawWave(amp,frec,color,previewCanvas);
 }
 
-frequencySlider.addEventListener("input",redrawWave);
-amplitudeSlider.addEventListener("input",redrawWave);
-colorSelector.addEventListener("change",redrawWave);
+function redrawPreviewWave(){
+    let wave = document.getElementById("dialogParam").value;
+    console.log(wave);
+    //verificacion
+    let amp = amplitudeSlider.value;
+    let frec = frequencySlider.value;
+    let color = colorSelector.value;
+    console.log(amp, frec, color);
+
+    console.log(wave);
+    wave.setAmplitude(amp);
+    console.log(wave);
+    wave.setFrequency(frec);
+    console.log(wave);
+    wave.setColor(color);
+    console.log(wave);
+
+    dialogParam.value = wave;
+    console.log(dialogParam.value);
+
+    ops.clearCanvas(previewCanvas);
+    wave.drawWave(previewCanvas,2);
+}
+
+frequencySlider.addEventListener("input",redrawPreviewWave);
+amplitudeSlider.addEventListener("input",redrawPreviewWave);
+colorSelector.addEventListener("change",redrawPreviewWave);
 
 
 window.onload= ops.intializeCanvas;
-window.onresize = console.log(ops.canvas);//resize all canvases
+
+
+window.onresize = ()=>{ 
+    console.log("resizing");
+    let canvasArray = document.getElementsByClassName("canvas");
+    console.log(canvasArray[1]);
+    //console.log(canvasArray);
+    for(let i; i< canvasArray.length;i++){
+        console.log(canvasArray[i]);
+        ops.resizeCanvas(canvasArray[i]);
+    }
+}//resize all canvases
 

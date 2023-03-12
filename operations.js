@@ -35,7 +35,8 @@ export function showAxes(ctx,axes) {
     //ctx.save();
 }
 
-//no puedo pintar varias 
+//no puedo pintar varias
+//deprecated, hay que eliminar. 
 export function drawWave(amp, frec,color, myCanvas){
     var ctx = myCanvas.getContext("2d");
     var width = ctx.canvas.width;
@@ -81,10 +82,6 @@ export function drawCanvas(){
     showAxes(ctx);
 }
 
-function resizeCanvas(){
-
-}
-
 //crea una wave
 export function createWaveCard(wave){
     //obtengo el padre y el template
@@ -97,6 +94,7 @@ export function createWaveCard(wave){
     let cardCanvas = tempNode.querySelector("canvas");
     let checkbox = tempNode.querySelector(".customCheck");
     let waveName = tempNode.querySelector("label");
+    let cardColumn = tempNode.querySelector(".cardMidColumn");
 
     //faltan verificaciones
 
@@ -117,12 +115,18 @@ export function createWaveCard(wave){
     
     //no es al clickar temp node
     //es al clicar midColumn (canvas y nombre)
-    tempNode.addEventListener("click",()=>{
+    cardColumn.addEventListener("click",()=>{
         waveDialog.showModal();
         var previewCanvas = document.querySelector("#previewCanvas");
+        //cuidado con estas dimensiones
         previewCanvas.width = window.innerWidth;
         previewCanvas.height = window.innerHeight;
         wave.drawWave(previewCanvas,5);
+    })
+
+    checkbox.addEventListener("click",()=>{
+        wave.triggerCanvas();
+        console.log("triggering");
     })
 
     //establezco las dimensiones del canvas
@@ -133,10 +137,32 @@ export function createWaveCard(wave){
 
     
     parent.appendChild(tempNode);
+    /*
     var rect = cardCanvas.parentNode.getBoundingClientRect();
+    console.log(cardCanvas.parentNode.height);
     console.log(rect);
-    cardCanvas.width=rect.width*2;
-    cardCanvas.height = (rect.height * 0.7)*2;
+    cardCanvas.width=rect.width;
+    //cardCanvas.height = (rect.height * 0.6);
+    cardCanvas.height = rect.height;
+    */
+
+    /*
+    var canvasParent = cardCanvas.parentNode;
+    console.log(canvasParent);
+    let styles = getComputedStyle(canvasParent);
+    let w = parseInt(styles.getPropertyValue("width"),10);
+    let h = parseInt(styles.getPropertyValue("height"),10);
+    console.log(w,h);
+    cardCanvas.width = w;
+    cardCanvas.height = 120;
+    //cardCanvas.maxHeight = h;
+    */
+
+    cardCanvas.style.width = "100%";
+    cardCanvas.style.height = "100%";
+    console.log(cardCanvas.offsetHeight);
+    cardCanvas.width = cardCanvas.offsetWidth;
+    cardCanvas.height = cardCanvas.offsetHeight;
     wave.drawWave(cardCanvas,3);
 }
 
@@ -161,6 +187,16 @@ export function newCanvas(parent){
 //abre una onda ya existente en el dialog
 export function openWaveInDialog(){
 
+}
+
+export function resizeCanvas(canvas){
+    //control de errores
+    let parent = canvas.parentNode
+    let style =getComputedStyle(parent);
+    let w = parseInt(styles.getPropertyValue("width"),10);
+    let h = parseInt(styles.getPropertyValue("height"),10);
+    canvas.height=h;
+    canvas.width=w;
 }
 
 

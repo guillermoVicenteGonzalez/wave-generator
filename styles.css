@@ -5,7 +5,8 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(20%, 25%) minmax(60%, 75%);
+    /*grid-template-columns: minmax(20%, 20%) minmax(80%, 80%);*/
+    grid-template-columns: 20% 80%;
 }
 
 /*
@@ -27,6 +28,11 @@ body{
     margin: 0;
     padding: 0;
     height: 100vh;
+}
+
+
+.control-panel{
+    min-width: 300px;
 }
 
 .control-panel > *{
@@ -70,6 +76,7 @@ body{
 }
 
 .canvas{
+    object-fit: con;
     align-self: center;
     width: 100%;
     height: 100%;
@@ -126,7 +133,11 @@ Card at the left side of the screen to manage each wave.
     padding: 10px 0;
 }
 
-
+.cardCanvas{
+    object-fit: cover;
+    display: block;
+    height: 100%;
+}
 
 /*
 .cardMidColumn{
@@ -148,3 +159,12 @@ Card at the left side of the screen to manage each wave.
     text-align: center;
 }
 
+/***********************************
+TAG STYLING
+***********************************/
+
+.customCheck{
+    border-radius: 200px;
+    size: 100px;
+    background-color: red;
+}
