@@ -43,6 +43,7 @@ createWaveBtn.addEventListener("click",()=>{
     amplitudeSlider.value = wave.getAmplitude();
     frequencySlider.value = wave.getFrequency();
     colorSelector.value = wave.getColor();
+    waveName.value = "";
     dialogParam.value = wave;
     console.log(dialogParam.value);
     wave.drawWave(previewCanvas,2);
@@ -68,6 +69,7 @@ auxBtn.addEventListener("click",()=>{
 newWaveBtn.addEventListener("click" ,()=>{
     let newWave = dialogParam.value;
     //y si ya existe una??
+
     let amp = amplitudeSlider.value;
     let frec = frequencySlider.value;
     let color = colorSelector.value;
@@ -82,18 +84,33 @@ newWaveBtn.addEventListener("click" ,()=>{
     newWave.setFrequency(frec);
     newWave.setColor(color);
     newWave.setName(name);
+
+    if(!waves.has(newWave.getName())){
+        console.log("la onda no existe");
+        waves.set(newWave.getName(),newWave);
+        let card = ops.createWaveCard(newWave);
+        let parent = document.querySelector("#canvasWrapper");
+        let tempCanvas = ops.newCanvas(parent);
+        canvases.push(tempCanvas);
+        //ops.waveSetup(tempCanvas); 
+        newWave.drawWave(tempCanvas);
+        newWave.setCanvas(tempCanvas);
+        newWave.setCard(card);
+    }else{
+        //es mas sencillo que la card lea un index (su param)
+        console.log("ya existía")
+        waves.set(newWave.getName(),newWave);
+        //actualizar card
+        newWave.clearCanvas();
+        newWave.updateWave(amp,frec,color);
+        newWave.drawWave(newWave.getCanvas());
+    }
     //verificar nombre
-    waves.set(newWave.getName(),newWave);
-    ops.createWaveCard(newWave);
+
 
 
     waveDialog.close();
-    let parent = document.querySelector("#canvasWrapper");
-    let tempCanvas = ops.newCanvas(parent);
-    canvases.push(tempCanvas);
-    //ops.waveSetup(tempCanvas); 
-    newWave.drawWave(tempCanvas);
-    newWave.setCanvas(tempCanvas);
+
 });
 
 
@@ -120,23 +137,18 @@ tempWaveCard.addEventListener("click",()=>{
 
 function redrawPreviewWave(){
     let wave = document.getElementById("dialogParam").value;
-    console.log(wave);
     //verificacion
     let amp = amplitudeSlider.value;
     let frec = frequencySlider.value;
     let color = colorSelector.value;
-    console.log(amp, frec, color);
 
-    console.log(wave);
+    //console.log(wave);
     wave.setAmplitude(amp);
-    console.log(wave);
     wave.setFrequency(frec);
-    console.log(wave);
     wave.setColor(color);
-    console.log(wave);
+
 
     dialogParam.value = wave;
-    console.log(dialogParam.value);
 
     ops.clearCanvas(previewCanvas);
     wave.drawWave(previewCanvas,2);

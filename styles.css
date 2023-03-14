@@ -109,9 +109,6 @@ Card at the left side of the screen to manage each wave.
 /********************
 * WAVE CARD
 *********************/
-.customCheck{
-
-}
 
 .playBtn{
     width: 25px;
@@ -131,13 +128,9 @@ Card at the left side of the screen to manage each wave.
     justify-items: center;
     margin: 10px 0;
     padding: 10px 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 }
 
-.cardCanvas{
-    object-fit: cover;
-    display: block;
-    height: 100%;
-}
 
 /*
 .cardMidColumn{

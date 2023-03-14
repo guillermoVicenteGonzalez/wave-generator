@@ -4,6 +4,7 @@ class Wave{
     frequency;
     color;
     canvas;
+    card;
     //canvas???
 
     constructor(amplitude,frequency,color,name){
@@ -26,9 +27,26 @@ class Wave{
     setColor(nC){this.color = nC;}
     getColor(){return this.color;}
 
+    setCard(nCard){this.card = nCard;}
+    getCard(){return this.card;}
+
     setCanvas(nCan){this.canvas = nCan;}
     getCanvas(){return this.canvas;}
     deleteCanvas(){this.canvas.remove();}
+    clearCanvas(canvas){
+        let ctx;
+        if(canvas == undefined){
+            console.log(canvas);
+            ctx = this.canvas.getContext("2d");
+        }else{
+            ctx = canvas.getContext("2d");
+        }
+        //let ctx = this.canvas.getContext("2d");
+        var width = ctx.canvas.width;
+        var height = ctx.canvas.height;
+        ctx.clearRect(0, 0, width, height);
+    }
+
     //hides or shows canvas deppending on its state
     triggerCanvas(){
         if(this.canvas.style.display == "none"){
@@ -96,7 +114,34 @@ class Wave{
             x++;
         }
         ctx.stroke();
+    }
 
+    updateWave(amp,frec,col,b){
+        let brush
+        let cardCanvas;
+
+        if(amp != undefined){
+            this.amplitude = amp;
+        }
+
+        if(!frec != undefined){
+            this.frequency = frec;
+        }
+
+        if(col != undefined){
+            this.color = col;
+        }
+
+        if(b != undefined){
+            brush = b;
+        }
+
+        this.drawWave(this.canvas, brush);
+        console.log(this.card);
+        cardCanvas = this.card.querySelector(".cardCanvas");
+        console.log(cardCanvas);
+        this.clearCanvas(cardCanvas);
+        this.drawWave(cardCanvas);
     }
 }
 

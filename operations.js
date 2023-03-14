@@ -35,33 +35,7 @@ export function showAxes(ctx,axes) {
     //ctx.save();
 }
 
-//no puedo pintar varias
-//deprecated, hay que eliminar. 
-export function drawWave(amp, frec,color, myCanvas){
-    var ctx = myCanvas.getContext("2d");
-    var width = ctx.canvas.width;
-    var height = ctx.canvas.height;
 
-    ctx.lineJoin="round";
-    ctx.lineCap="round";
-    ctx.filter= "blur(0px)";
-    ctx.beginPath();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = color;
-
-    var x = 0;
-    var y = 0;
-    var amplitude = amp;
-    var frequency = (frec * 2 * Math.PI)/myCanvas.width; 
-    
-    while (x < width) {
-        y = height/2 + amplitude * Math.sin(x * frequency);
-        ctx.lineTo(x, y);
-        x = x + 1;
-    }
-    ctx.stroke();
-    return ctx;
-}
 
 
 export function intializeCanvas(){
@@ -122,6 +96,9 @@ export function createWaveCard(wave){
         previewCanvas.width = window.innerWidth;
         previewCanvas.height = window.innerHeight;
         wave.drawWave(previewCanvas,5);
+        //hay que pasarle el valor wave al param de la preview
+        //hay que darle valores a los selectores
+
     })
 
     checkbox.addEventListener("click",()=>{
@@ -164,6 +141,7 @@ export function createWaveCard(wave){
     cardCanvas.width = cardCanvas.offsetWidth;
     cardCanvas.height = cardCanvas.offsetHeight;
     wave.drawWave(cardCanvas,3);
+    return tempNode;
 }
 
 export function clearCanvas(canvas){

@@ -20,6 +20,7 @@ El simulador permite (permitirá) generar ondas senoidales parametrizables. Mane
       - [ ] dimensiones dinamicas
    - [ ] animaciones realistas (1 Hz -> un ciclo por segundo)
 - [ ] reproduccion de audio.
+- [ ] limite de ondas
 
 ### Señal senoidal
 A sen (w t + o)
