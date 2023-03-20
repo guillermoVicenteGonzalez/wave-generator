@@ -75,7 +75,8 @@ export function createWaveCard(wave){
     //les doy valor a los parametros
     tempNode.id = wave.getName() + "Card";
     tempNode.style.display="grid";
-    cardParam.value = wave; //el parametro de la carta es la wave
+    //cardParam.value = wave; //el parametro de la carta es la wave
+    cardParam.value = wave.getName();
     console.log(wave.getName());
     waveName.innerHTML = wave.getName();
 
@@ -87,8 +88,7 @@ export function createWaveCard(wave){
         // y, o wave.playAnimation
     })
     
-    //no es al clickar temp node
-    //es al clicar midColumn (canvas y nombre)
+
     cardColumn.addEventListener("click",()=>{
         waveDialog.showModal();
         var previewCanvas = document.querySelector("#previewCanvas");
@@ -96,6 +96,7 @@ export function createWaveCard(wave){
         previewCanvas.width = window.innerWidth;
         previewCanvas.height = window.innerHeight;
         wave.drawWave(previewCanvas,5);
+        p
         //hay que pasarle el valor wave al param de la preview
         //hay que darle valores a los selectores
 

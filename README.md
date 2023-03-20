@@ -21,6 +21,10 @@ El simulador permite (permitirá) generar ondas senoidales parametrizables. Mane
    - [ ] animaciones realistas (1 Hz -> un ciclo por segundo)
 - [ ] reproduccion de audio.
 - [ ] limite de ondas
+- [ ] cambiar el nombre. 2 opciones 
+    - funcion a parte
+    - rehacer de modo que el parametro de las cards sea un id
+      - darle campo id a las cards y hacer que las keys del mapa sean ids
 
 ### Señal senoidal
 A sen (w t + o)
