@@ -69,6 +69,7 @@ auxBtn.addEventListener("click",()=>{
 //al pulsar boton accept del dialog
 newWaveBtn.addEventListener("click" ,()=>{
     let newWave = dialogParam.value;
+    let oldName = newWave.getName();
     //y si ya existe una??
 
     let amp = amplitudeSlider.value;
@@ -85,6 +86,7 @@ newWaveBtn.addEventListener("click" ,()=>{
     newWave.setFrequency(frec);
     newWave.setColor(color);
     newWave.setName(name);
+
 
     if(!waves.has(newWave.getName())){
         console.log("la onda no existe");
@@ -266,8 +268,9 @@ export function createWaveCard(wave){
     //preparo los eventos
     cardPlayBtn.addEventListener("click",()=>{
         console.log(cardParam.value);
+        let wave = waves.get(cardParam.value);
         //en un futuro
-        //wave.playSound
+        wave.playSound()
         // y, o wave.playAnimation
     })
     

@@ -5,6 +5,9 @@ class Wave{
     color;
     canvas;
     card;
+    isPlaying;
+    audioContext;
+    myOscillator;//esta sonando ahora mismo?
     //canvas???
 
     constructor(amplitude,frequency,color,name){
@@ -12,6 +15,7 @@ class Wave{
         this.amplitude = amplitude;
         this.color = color;
         this.frequency = frequency;
+        this.isPlaying = false;
     }
 
     //aqui faltan veritficaciones de rango y de tipo.
@@ -142,6 +146,30 @@ class Wave{
         console.log(cardCanvas);
         this.clearCanvas(cardCanvas);
         this.drawWave(cardCanvas);
+    }
+
+    playSound(){
+        if(this.isPlaying){
+            this.isPlaying = false;
+            this.myOscillator.stop();
+        }else{
+            let frec = this.frequency * 2 * Math.PI
+            console.log(frec);
+            console.log(this.frequency);
+            this.audioContext = new AudioContext();
+            this.myOscillator = this.audioContext.createOscillator();    
+            this.isPlaying = true;
+            this.myOscillator.frequency.value = frec;
+            this.myOscillator.connect(this.audioContext.destination);
+            this.myOscillator.start();
+        }
+
+        //esto luego lo paro
+        //myOscillator.stop(audioContext.currentTime + 2);
+    }
+
+    animateWave(){
+        
     }
 }
 

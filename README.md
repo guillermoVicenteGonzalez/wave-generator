@@ -2,6 +2,11 @@
 Sencillo simulador de ondas senoidales para uso educativo. 
 El simulador permite (permitirá) generar ondas senoidales parametrizables. Manejar sus atributos (frecuencia y amplitud), reproducir su sonido, fusionarlas con otras ondas etc.
 
+# Importante
+Hay que refactorizar todo el codigo. Que sea codigo espagueti va a complicar todo mucho.
+
+Tambien hay que empezar a pensar en escalas y hacerlo todo realista. Una frecuencia de 2 no se escucha nada.
+
 # Por hacer
  - [ ] redimensionar correctamente
  - [ ] interfaz rediseñada
