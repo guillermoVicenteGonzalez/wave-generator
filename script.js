@@ -33,28 +33,18 @@ var dialogParam = document.querySelector("#dialogParam");
  * Click events
  **^************************/
 
-
+//boton de crear onda de 0
 createWaveBtn.addEventListener("click",()=>{
-    //waveDialog.showModal();
-    //esto esta mal, tienen que ser las dimensiones del div.
     previewCanvas.width = window.innerWidth;
     previewCanvas.height = window.innerHeight;
     let wave = new Wave(100,2,"#0000ff","");
-    //amplitudeSlider.value = wave.getAmplitude();
-    //frequencySlider.value = wave.getFrequency();
-    //colorSelector.value = wave.getColor();
-    //waveName.value = "";
-    //dialogParam.value = wave;
     loadWaveDialog(wave);
-    console.log(dialogParam.value);
-    //wave.drawWave(previewCanvas,2);
 });
 
 
 //cerrar modal
 closeWaveDialog.addEventListener("click",()=>{
     waveDialog.close();
-
 })
 
 
@@ -72,22 +62,26 @@ newWaveBtn.addEventListener("click" ,()=>{
     let oldName = newWave.getName();
     //y si ya existe una??
 
+    //tomo los valores de los controles
     let amp = amplitudeSlider.value;
     let frec = frequencySlider.value;
     let color = colorSelector.value;
     let name = waveName.value;
 
+    //si alguno es null muestro error y salgo
     if(frec == null || amp == null || name == null || name == ""){
         alert("fill all the fields");
         return undefined;
     }
 
+    //en caso contrario cambio los valores de la onda.
     newWave.setAmplitude(amp);
     newWave.setFrequency(frec);
     newWave.setColor(color);
     newWave.setName(name);
 
-
+    //si el map ya contenia una onda con el mismo nombre, la modifica
+    //en caso contrario crea una nueva.
     if(!waves.has(newWave.getName())){
         console.log("la onda no existe");
         waves.set(newWave.getName(),newWave);
@@ -109,9 +103,6 @@ newWaveBtn.addEventListener("click" ,()=>{
         newWave.drawWave(newWave.getCanvas());
     }
     //verificar nombre
-
-
-
     waveDialog.close();
 
 });
@@ -128,16 +119,7 @@ tempWaveCard.addEventListener("click",()=>{
  * Slider events
  *********************/
 
-//deprecated, new version below
- function redrawWave(){
-    //pilar valores
-    let amp = amplitudeSlider.value;
-    let frec = frequencySlider.value;
-    let color = colorSelector.value;
-    clearCanvas(previewCanvas);
-    drawWave(amp,frec,color,previewCanvas);
-}
-
+//dibuja la onda del dialogo.
 function redrawPreviewWave(){
     let wave = document.getElementById("dialogParam").value;
     //verificacion
@@ -162,8 +144,11 @@ amplitudeSlider.addEventListener("input",redrawPreviewWave);
 colorSelector.addEventListener("change",redrawPreviewWave);
 
 
-window.onload= intializeCanvas;
+/******************************
+ * LIFECYCLE EVENTS
+ ******************************/
 
+window.onload= intializeCanvas;
 
 window.onresize = ()=>{ 
     console.log("resizing");
@@ -193,7 +178,7 @@ function loadWaveDialog(wave){
     waveDialog.showModal();
 }
 
- export function showAxes(ctx,axes) {
+function showAxes(ctx,axes) {
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
 
@@ -221,9 +206,7 @@ function loadWaveDialog(wave){
 }
 
 
-
-
-export function intializeCanvas(){
+function intializeCanvas(){
     let canvas = document.getElementById("mainCanvas");
     canvas.width = window.innerWidth;     // equals window dimension
     canvas.height = window.innerHeight;
@@ -232,17 +215,9 @@ export function intializeCanvas(){
     ctx.save();
 }
 
-export function drawCanvas(){
-    console.log("drawing canvas");
-    //canvas.width = window.innerWidth;     // equals window dimension
-    //canvas.height = window.innerHeight;
-    //ctx = canvas.getContext("2d");
-    //ctx.restore();
-    showAxes(ctx);
-}
 
-//crea una wave
-export function createWaveCard(wave){
+//crea una wave card
+function createWaveCard(wave){
     //obtengo el padre y el template
     var parent = document.querySelector("#cardContainer");
     var tempNode = document.querySelector("div[data-type='template']").cloneNode(true);
@@ -254,6 +229,7 @@ export function createWaveCard(wave){
     let checkbox = tempNode.querySelector(".customCheck");
     let waveName = tempNode.querySelector("label");
     let cardColumn = tempNode.querySelector(".cardMidColumn");
+    let plusBtn = tempNode.querySelector(".plusBtn");
 
     //faltan verificaciones
 
@@ -266,6 +242,7 @@ export function createWaveCard(wave){
     waveName.innerHTML = wave.getName();
 
     //preparo los eventos
+    //evento de sonido de la onda.
     cardPlayBtn.addEventListener("click",()=>{
         console.log(cardParam.value);
         let wave = waves.get(cardParam.value);
@@ -275,7 +252,8 @@ export function createWaveCard(wave){
     })
     
 
-    cardColumn.addEventListener("click",()=>{
+    //evento de clickar en la onda para cambiarla
+    cardCanvas.addEventListener("click",()=>{
         //cuidado con estas dimensiones
         previewCanvas.width = window.innerWidth;
         previewCanvas.height = window.innerHeight;
@@ -285,20 +263,21 @@ export function createWaveCard(wave){
 
     })
 
+    //evento para mostrar o no la onda.
     checkbox.addEventListener("click",()=>{
         wave.triggerCanvas();
         console.log("triggering");
     })
 
-    //establezco las dimensiones del canvas
-    //var rect = cardCanvas.parentNode.getBoundingClientRect();
-    //console.log(rect);
+    //evento para sumar ondas
+    plusBtn.addEventListener("click",()=>{
+        console.log("adding waves...");
+        wave.drawWaveSum(wave.canvas,waves.get("josefa"));
+    })
 
-    //dibujo en el canvas de la tarjeta
 
-    
+    //meto la nueva card en el contenedor de cards
     parent.appendChild(tempNode);
-
 
     cardCanvas.style.width = "100%";
     cardCanvas.style.height = "100%";
@@ -309,7 +288,7 @@ export function createWaveCard(wave){
     return tempNode;
 }
 
-export function clearCanvas(canvas){
+function clearCanvas(canvas){
     let ctx = canvas.getContext("2d");
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
@@ -327,11 +306,7 @@ export function newCanvas(parent){
     return newCanvas;
 }
 
-//abre una onda ya existente en el dialog
-export function openWaveInDialog(){
-
-}
-
+//aun no implementado???
 export function resizeCanvas(canvas){
     //control de errores
     let parent = canvas.parentNode

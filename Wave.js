@@ -7,15 +7,17 @@ class Wave{
     card;
     isPlaying;
     audioContext;
-    myOscillator;//esta sonando ahora mismo?
-    //canvas???
+    myOscillator;
+    scale; //scale = 1 => 1 segundo;
+    //la escala deberia ser global a todos los canvas.
 
-    constructor(amplitude,frequency,color,name){
+    constructor(amplitude,frequency,color,name = "undefined"){
         this.name = name;
         this.amplitude = amplitude;
         this.color = color;
         this.frequency = frequency;
         this.isPlaying = false;
+        this.scale = 1;
     }
 
     //aqui faltan veritficaciones de rango y de tipo.
@@ -76,7 +78,8 @@ class Wave{
             ctx.lineWidth = brushSize;
         }
         ctx.strokeStyle = this.color;
-        var frec = (this.frequency * 2 * Math.PI)/canvas.width;
+        var frec = (this.frequency * 2 * Math.PI)/(canvas.width / this.scale);
+        //var frec = (this.frequency * 2 * Math.PI)/canvas.width;
         //var amp = (this.amplitude)/height;
     
         var x = 0;
@@ -166,6 +169,49 @@ class Wave{
 
         //esto luego lo paro
         //myOscillator.stop(audioContext.currentTime + 2);
+    }
+
+    addSines(sinA, sinB){
+        return 2 * Math.cos( (sinA-sinB) / 2) * Math.sin((sinA - sinB) / 2);
+    }
+
+    sumWaves(wave2){
+        let a1 = this.getAmplitude();
+        let f1 = this.getFrequency();
+        let a2 = wave2.getAmplitude();
+        let f2 = wave2.getFrequency();
+
+        let eq1 = a1 * Math.a
+        //x sin (wt) 
+    }
+
+    drawWaveSum(canvas,wave2){
+        console.log("drawing sum");
+        console.log(wave2);
+        var ctx = canvas.getContext("2d");
+        var width = ctx.canvas.width;
+        var height = ctx.canvas.height;
+        //console.log(width);
+        //console.log(height);
+        
+        ctx.lineJoin="miter";
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = this.color;
+        var frec = (this.frequency * 2 * Math.PI)/(canvas.width / this.scale);
+        var frec2 = (wave2.getFrequency() * 2 * Math.PI)/(canvas.width / this.scale);
+        //var frec = (this.frequency * 2 * Math.PI)/canvas.width;
+        //var amp = (this.amplitude)/height;
+    
+        var x = 0;
+        var y = 0;
+        
+        while (x < width) {
+            y = height/2 + (this.amplitude * Math.sin(x * frec)) + ( + wave2.getAmplitude() * Math.sin(x * frec2));
+            ctx.lineTo(x, y);
+            x++;
+        }
+        ctx.stroke();
     }
 
     animateWave(){

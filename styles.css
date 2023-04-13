@@ -5,8 +5,8 @@
     height: 100%;
     width: 100%;
     display: grid;
-    /*grid-template-columns: minmax(20%, 20%) minmax(80%, 80%);*/
-    grid-template-columns: 20% 80%;
+    grid-template-columns: minmax(20%, 20%) minmax(80%, 80%);
+    /*grid-template-columns: 20% 80%;*/
 }
 
 /*
