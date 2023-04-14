@@ -76,6 +76,7 @@ body{
 }
 
 .canvas{
+    display: block;
     object-fit: contain;
     align-self: center;
     width: 100%;

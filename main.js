@@ -1,6 +1,13 @@
 import {Wave} from "./Wave.js"
 
-
+function intializeCanvas(){
+    let canvas = document.getElementById("mainCanvas");
+    canvas.width = window.innerWidth;     // equals window dimension
+    canvas.height = window.innerHeight;
+    let ctx = canvas.getContext("2d");
+    showAxes(ctx);
+    ctx.save();
+}
 
 function showAxes(ctx,axes) {
     var width = ctx.canvas.width;
@@ -40,6 +47,9 @@ function resizeCanvas(canvas){
 
     canvas.width = width ;
     canvas.height = height;
+
+    showAxes(ctx);
+    ctx.save();
     console.log("resizing");
 }
 
@@ -47,6 +57,6 @@ function resizeCanvas(canvas){
 window.onresize = ()=>{
     //poco eficiente
     //https://web.archive.org/web/20220714020647/https://bencentra.com/code/2015/02/27/optimizing-window-resize.html
-    resizeCanvas(canvas);
+    //resizeCanvas(canvas);
 }
 //intializeCanvas();

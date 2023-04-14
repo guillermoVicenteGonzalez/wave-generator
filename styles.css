@@ -2,7 +2,7 @@
 * Main structure
 *************************/
 body{
-    margin:0;
+    margin: 0;
     padding: 0;
     height: 100vh;
 }
@@ -11,30 +11,29 @@ body{
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-columns: minmax(300px, 20%) auto ;
+    grid-template-columns: minmax(300px, 20%) minmax(700px, 80%) ;
 }
 
 #controlPanel{
-    background-color: blue;
-
+    border-right: .5px solid #000;
 }
+
 
 #canvasContainer{
-    background-color: green;
+    object-fit: cover;
     width: 100%;
     height: 100%;
-}
-
-.canvas{
-    width: 100%;
-    height: 99%;
-    background-color: red;
 }
 
 /*******************
 * Canvas Stuff
 ********************/
 
+.canvas{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
 /*******************
 * Styling
@@ -48,4 +47,7 @@ body{
 /*************************
 * Mierdas y pruebas
 ***************************/
+
+
+
 
