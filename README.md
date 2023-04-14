@@ -31,6 +31,9 @@ Tambien hay que empezar a pensar en escalas y hacerlo todo realista. Una frecuen
     - rehacer de modo que el parametro de las cards sea un id
       - darle campo id a las cards y hacer que las keys del mapa sean ids
 
+### Notas
+investigar bien como funcionan las dimensiones de los canvas. Tal y como lo tengo deberia funcionar pero el canvas no se ajusta bien
+
 ### Señal senoidal
 A sen (w t + o)
 A = amplitud

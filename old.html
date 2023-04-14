@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="old.css">
+    <script type="module" src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+
+    </nav>
+    
+    <content>
+        
+        <div class="grid-container">
+            <div class="control-panel">
+                <button id="createWaveBtn" class="openModal defaultBtn">create wave</button>
+                <button id="auxBtn" class="defaultBtn">Aux</button>
+                
+                <div class="flexContainer" id="cardContainer">
+                    <!--Wave cards-->
+                    <div class="waveCard" style="display: none;" data-type="template">
+                        <param>
+                        <input type="checkbox" class="customCheck">
+                        <div class="cardMidColumn">
+                                <canvas class="cardCanvas" style="max-height: 120px;"></canvas>
+                            <!--<label style="background-color: green;"></label>-->
+                            <div>
+                                <label></label>
+                                <button class="plusBtn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="playBtn"></div>
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <div id="canvasWrapper">
+                <canvas class="canvas-grid canvas" id="mainCanvas">
+
+                </canvas>
+            </div>
+        
+
+        <!--
+            <button id="newCanvasBtn" onclick="drawWave(50,2,'A')">new canvas</button>
+            <canvas class="canvas-grid" id="canvas">
+
+            </canvas>
+        -->
+        </div>
+    </content>
+
+    <dialog class="dialogCard card" id="waveDialog">
+        <object id="dialogParam">
+        <div class="flexContainer">
+            <canvas id="previewCanvas"></canvas>
+            <div class="modalControls">
+                <!--<input id="frecuency-input" type="number" name="frecuency-value">-->
+                <input type="range" min="1" max="300" value="1" class="slider" id="frequency-slider">
+                <input type="range" min="1" max="500" value="100" class="slider" id="amplitude-slider">
+                <select id="color-input" name="color">
+                    <option value="#0000ff">Blue</option>
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#ffff00">Yellow</option>
+                </select>
+                <input type="text" id="waveName" placeholder="name">
+                <button id="newWaveBtn" class="defaultBtn">Accept</button>
+                <button class="closeModal defaultBtn">close</button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog>
+        
+    </dialog>
+</body>
+</html>
