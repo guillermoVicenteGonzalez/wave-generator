@@ -13,11 +13,26 @@
 
     <content class="gridContainer">
         <div id="controlPanel">
-            <button id="newWaveBtn">new wave</button>
-            <button id="auxBtn">Aux</button>
+            <button id="newWaveBtn" class="customBtn">new wave</button>
+            <button id="auxBtn" class="customBtn">Aux</button>
 
             <div id="cardContainer">
+                <!--Wave cards-->
+                <div class="waveCard" style="display: none" data-type="template">
+                    <param>
+                    <input type="checkbox" class="customCheck">
+                    <div class="cardMidColumn">
+                            <canvas class="canvas" style="max-height: 120px;"></canvas>
+                        <!--<label style="background-color: green;"></label>-->
+                        <div>
+                            <button class="deleteWaveBtn">-</button>
+                            <label></label>
+                            <button class="plusBtn">+</button>
+                        </div>
+                    </div>
 
+                    <div class="playBtn"></div>
+                </div>
             </div>
         </div>
         
@@ -40,8 +55,8 @@
                     <option value="#ffff00">Yellow</option>
                 </select>
                 <input type="text" id="waveName" placeholder="name">
-                <button id="acceptWaveBtn" class="defaultBtn">Accept</button>
-                <button class="closeModal defaultBtn">close</button>
+                <button id="acceptWaveBtn" class="customBtn">Accept</button>
+                <button class="closeModal customBtn">close</button>
             </div>
         </div>
     </dialog>

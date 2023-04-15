@@ -54,6 +54,7 @@ acceptWaveBtn.addEventListener("click",()=>{
     controller.createWave(previewWave, canvasContainer);
     previewWave.drawWave();
     waveDialog.close();
+    createWaveCard(previewWave);
 })
 
 closeWaveDialog.addEventListener("click",()=>{
@@ -97,7 +98,72 @@ function clearCanvas(canvas){
     ctx.clearRect(0, 0, width, height);
 }
 
+function createWaveCard(wave){
+    //obtengo el contenedor de cards y el template
+    var parent = document.querySelector("#cardContainer");
+    var tempNode = document.querySelector("div[data-type='template']").cloneNode(true);
+    
+    //obtengo los elementos de la card
+    let cardParam = tempNode.querySelector("param");
+    let cardPlayBtn = tempNode.querySelector(".playBtn");
+    let cardCanvas = tempNode.querySelector("canvas");
+    let checkbox = tempNode.querySelector(".customCheck");
+    let waveName = tempNode.querySelector("label");
+    let cardColumn = tempNode.querySelector(".cardMidColumn");
+    let plusBtn = tempNode.querySelector(".plusBtn");
 
+    //faltan verificaciones
+
+    //les doy valor a los parametros
+    tempNode.id = wave.getName() + "Card";
+    tempNode.style.display="grid";
+    //cardParam.value = wave; //el parametro de la carta es la wave
+    cardParam.value = wave.getName();
+    console.log(wave.getName());
+    waveName.innerHTML = wave.getName();
+
+    //preparo los eventos
+    //evento de sonido de la onda.
+    cardPlayBtn.addEventListener("click",()=>{
+        console.log(cardParam.value);
+        let wave = controller.getWave(cardParam.value);
+        wave.playSound()
+        // y, o wave.playAnimation
+    })
+    
+
+    //evento de clickar en la onda para cambiarla
+    cardCanvas.addEventListener("click",()=>{
+        //cuidado con estas dimensiones
+        let wave = controller.getWave(cardParam.value);
+        //loadWaveDialog(wave);
+    })
+
+    //evento para mostrar o no la onda.
+    checkbox.addEventListener("click",()=>{
+        wave.triggerCanvas();
+        console.log("triggering");
+    })
+
+    //evento para sumar ondas
+    plusBtn.addEventListener("click",()=>{
+        console.log("adding waves...");
+        wave.drawWaveSum(wave.canvas,waves.get("josefa"));
+    })
+
+
+    //meto la nueva card en el contenedor de cards
+    parent.appendChild(tempNode);
+
+    //cardCanvas.style.width = "100%";
+    //cardCanvas.style.height = "100%";
+    console.log(cardCanvas.offsetHeight);
+    //cardCanvas.width = cardCanvas.offsetWidth;
+    //cardCanvas.height = cardCanvas.offsetHeight;
+    resizeCanvas(cardCanvas);
+    wave.drawWave(cardCanvas,3);
+    return tempNode;
+}
 
 
 
