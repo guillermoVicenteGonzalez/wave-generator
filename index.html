@@ -13,8 +13,8 @@
 
     <content class="gridContainer">
         <div id="controlPanel">
-            <button></button>
-            <button></button>
+            <button id="newWaveBtn">new wave</button>
+            <button id="auxBtn">Aux</button>
 
             <div id="cardContainer">
 
@@ -22,10 +22,29 @@
         </div>
         
         <div id="canvasContainer">
-            <canvas class="canvas"></canvas>
+            <canvas class="canvas bigCanvas" id="mainCanvas"></canvas>
         </div>
     </content>
 
+
+    <dialog class="dialogCard card" id="waveDialog">
+        <div id="dialogContainer">
+            <canvas id="previewCanvas" class="canvas"></canvas>
+            <div id="modalControls">
+                <input type="range" min="1" max="300" value="1" class="slider" id="frequency-slider">
+                <input type="range" min="1" max="500" value="100" class="slider" id="amplitude-slider">
+                <select id="color-input" name="color">
+                    <option value="#0000ff">Blue</option>
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#ffff00">Yellow</option>
+                </select>
+                <input type="text" id="waveName" placeholder="name">
+                <button id="acceptWaveBtn" class="defaultBtn">Accept</button>
+                <button class="closeModal defaultBtn">close</button>
+            </div>
+        </div>
+    </dialog>
 
 </body>
 </html>

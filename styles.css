@@ -21,8 +21,27 @@ body{
 
 #canvasContainer{
     object-fit: cover;
+    position: relative;
     width: 100%;
     height: 100%;
+}
+
+/*******************
+* Dialog Stuff
+********************/
+#waveDialog{
+    min-width: 300px;
+    display: grid;
+    grid-template-rows: minmax(300px, 100%) minmax(10px, 20px);
+}
+
+#waveDialog > *{
+    padding:30px;
+}
+
+#modalControls{
+    align-items: center;
+    text-align: center;
 }
 
 /*******************
@@ -30,14 +49,34 @@ body{
 ********************/
 
 .canvas{
-    display: block;
+    display:block;
     width: 100%;
     height: 100%;
+}
+
+.bigCanvas{
+    position: absolute; /*esto para que estackeen los canvas*/
+    top:0;
 }
 
 /*******************
 * Styling
 ********************/
+.card{
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+button{
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    border-radius:60px;
+    min-width: 100px;
+    max-width: 500px;
+    min-height: 40px;
+    max-width: 80px; 
+}
 
 /*************************
 * Responsive
@@ -48,6 +87,9 @@ body{
 * Mierdas y pruebas
 ***************************/
 
+.test{
+    background-color: red;
+}
 
 
 

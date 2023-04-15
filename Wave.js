@@ -64,6 +64,16 @@ class Wave{
 
     //cambiar a canvas
     drawWave(canvas, brushSize){
+        if(canvas == undefined && this.canvas != undefined){
+            canvas = this.canvas;
+        }
+
+        if(canvas == undefined && this.canvas == undefined){
+            console.error("drawWave: no canvas specified");
+            return false;
+        }
+
+
         var ctx = canvas.getContext("2d");
         var width = ctx.canvas.width;
         var height = ctx.canvas.height;

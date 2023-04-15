@@ -1,4 +1,113 @@
 import {Wave} from "./Wave.js"
+import * as controller from "./controller.js";
+
+//variables
+var previewWave = new Wave(100,2,"#0000ff","");;
+
+//elements
+var newWaveBtn = document.querySelector("#newWaveBtn");
+var auxBtn = document.querySelector("#auxBtn");
+var waveDialog = document.querySelector("#waveDialog");
+var mainCanvas = document.querySelector("#mainCanvas");
+var canvasContainer = document.querySelector("#canvasContainer")
+
+//dialog elements
+var frequencySlider = document.querySelector("#frequency-slider");
+var amplitudeSlider = document.querySelector("#amplitude-slider")
+var colorSelector = document.querySelector('[name="color"]');
+var previewCanvas = document.querySelector("#previewCanvas");
+var waveName = document.querySelector("#waveName");
+var acceptWaveBtn = document.querySelector("#acceptWaveBtn");
+var tempWaveCard = document.querySelector("div[data-type='template']");
+var dialogParam = document.querySelector("#dialogParam");
+var closeWaveDialog = document.querySelector(".closeModal");
+
+//start
+controller.addCanvas(previewCanvas, mainCanvas);
+
+
+/**********************
+ * Main page events
+ **********************/
+//boton de abrir el dialogo etc...
+newWaveBtn.addEventListener("click",()=>{
+    waveDialog.showModal();
+    resizeCanvas(previewCanvas);
+    previewWave = new Wave(100,2,"#0000ff","");
+    previewWave.drawWave(previewCanvas,2);
+});
+
+//boton auxiliar
+auxBtn.addEventListener("click",()=>{
+    let list = controller.getWaveCollection();
+    console.log(list);
+})
+
+
+/**********************
+ * Dialog card events
+ **********************/
+
+//boton de aceptar del dialog => crea una onda
+acceptWaveBtn.addEventListener("click",()=>{
+    previewWave.setName(waveName.value);
+    controller.createWave(previewWave, canvasContainer);
+    previewWave.drawWave();
+    waveDialog.close();
+})
+
+closeWaveDialog.addEventListener("click",()=>{
+    waveDialog.close();
+})
+
+frequencySlider.addEventListener("input",redrawPreviewWave);
+amplitudeSlider.addEventListener("input",redrawPreviewWave);
+colorSelector.addEventListener("change",redrawPreviewWave);
+
+/**********************
+ * Other view functions
+ **********************/
+
+function redrawPreviewWave(){
+    let amp = amplitudeSlider.value;
+    let frec = frequencySlider.value;
+    let color = colorSelector.value;
+
+    previewWave.setAmplitude(amp);
+    previewWave.setFrequency(frec);
+    previewWave.setColor(color);
+
+    clearCanvas(previewCanvas);
+    previewWave.drawWave(previewCanvas,2);
+}
+
+/**********************
+ * Complementary functions
+ **********************/
+
+function clearCanvas(canvas){
+    if(canvas.nodeName != 'CANVAS'){
+        console.error("clearCanvas: parameter is not a canvas");
+        return false;
+    }
+
+    let ctx = canvas.getContext("2d");
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+    ctx.clearRect(0, 0, width, height);
+}
+
+
+
+
+
+
+/***
+ * TESTS
+ */
+ let canvas = document.getElementById("mainCanvas");
+
+
 
 function intializeCanvas(){
     let canvas = document.getElementById("mainCanvas");
@@ -35,21 +144,23 @@ function showAxes(ctx,axes) {
     ctx.stroke();
     //ctx.save();
 }
-let canvas = document.getElementById("mainCanvas");
-resizeCanvas(canvas);
+//let canvas = document.getElementById("mainCanvas");
+//resizeCanvas(canvas);
 
 //intializeCanvas();
 
 function resizeCanvas(canvas){
     let container = canvas.parentElement;
+    console.log(container);
+
     let width = container.clientWidth;
     let height = container.clientHeight;
+
+    console.log(width, height);
 
     canvas.width = width ;
     canvas.height = height;
 
-    showAxes(ctx);
-    ctx.save();
     console.log("resizing");
 }
 
