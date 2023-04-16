@@ -133,6 +133,7 @@ class Wave{
         ctx.stroke();
     }
 
+    //deprecated
     updateWave(amp,frec,col,b){
         let brush
         let cardCanvas;
@@ -159,6 +160,19 @@ class Wave{
         console.log(cardCanvas);
         this.clearCanvas(cardCanvas);
         this.drawWave(cardCanvas);
+    }
+
+    reloadWave(...canvasList){
+        if(canvasList != undefined){
+            //to implement
+            //si se pasa una lista de canvases, se actualizan esos tambien
+        }
+
+        this.drawWave(this.canvas, 2);
+        let cardCanvas = this.card.querySelector("canvas");
+        this.clearCanvas(cardCanvas);
+        this.drawWave(cardCanvas)
+
     }
 
     playSound(){

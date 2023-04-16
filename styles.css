@@ -11,7 +11,7 @@ body{
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-columns: minmax(300px, 350px) minmax(700px, 80%) ;
+    grid-template-columns: minmax(300px, 350px) minmax(700px, 100%) ;
 }
 
 #controlPanel{
@@ -33,8 +33,9 @@ body{
 #dialogContainer{
     display: grid;
     grid-template-rows: minmax(300px, 90%) minmax(15px, 10%);
+    padding:5px;
+    margin: 5px;
 }
-
 
 
 #modalControls{
@@ -62,11 +63,11 @@ body{
 * Wave Card
 ********************/
 #cardContainer{
-    padding:8px;
+
 }
 
 .waveCard{
-    height: 170px;
+    height: 150px;
     border-radius: 25px;
     background-color: #f5f5f5;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
@@ -74,6 +75,7 @@ body{
     grid-template-columns: 10% 80% 10%;
     align-items: center;
     justify-items: center;
+    margin:10px;
 }
 
 .cardMidColumn{

@@ -31,9 +31,11 @@ controller.addCanvas(previewCanvas, mainCanvas);
  **********************/
 //boton de abrir el dialogo etc...
 newWaveBtn.addEventListener("click",()=>{
+    waveName.value = "";
+    waveName.disabled = false;
     waveDialog.showModal();
     resizeCanvas(previewCanvas);
-    previewWave = new Wave(100,2,"#0000ff","");
+    previewWave = new Wave(50,1,"#0000ff","");
     previewWave.drawWave(previewCanvas,2);
 });
 
@@ -49,13 +51,29 @@ auxBtn.addEventListener("click",()=>{
  **********************/
 
 //boton de aceptar del dialog => crea una onda
+
 acceptWaveBtn.addEventListener("click",()=>{
+
     previewWave.setName(waveName.value);
-    controller.createWave(previewWave, canvasContainer);
-    previewWave.drawWave();
+    let exists = controller.getWave(previewWave.getName());
+    if(exists){
+        var nWave = controller.updateWave(previewWave);
+        nWave.reloadWave();
+        resizeCanvas(nWave.getCanvas());
+    }else{
+        let card = createWaveCard(previewWave);
+        previewWave.setCard(card);
+        var nWave = controller.createWave(previewWave, canvasContainer);
+        resizeCanvas(nWave.getCanvas());
+    }
+
+    resizeCanvas(nWave.getCanvas());
+    nWave.drawWave();
     waveDialog.close();
-    createWaveCard(previewWave);
+
 })
+
+
 
 closeWaveDialog.addEventListener("click",()=>{
     waveDialog.close();
@@ -80,6 +98,19 @@ function redrawPreviewWave(){
 
     clearCanvas(previewCanvas);
     previewWave.drawWave(previewCanvas,2);
+}
+
+function loadPreviewWave(wave){
+    previewWave = wave;
+    amplitudeSlider.value = previewWave.getAmplitude();
+    frequencySlider.value = previewWave.getFrequency();
+    colorSelector.value = previewWave.getColor();
+    waveName.value = previewWave.getName();
+    previewWave.drawWave(previewCanvas,2);
+
+    clearCanvas(previewCanvas);
+    previewWave.drawWave(previewCanvas);
+    waveDialog.showModal();
 }
 
 /**********************
@@ -125,19 +156,27 @@ function createWaveCard(wave){
     //preparo los eventos
     //evento de sonido de la onda.
     cardPlayBtn.addEventListener("click",()=>{
-        console.log(cardParam.value);
         let wave = controller.getWave(cardParam.value);
         wave.playSound()
         // y, o wave.playAnimation
     })
     
 
+    
     //evento de clickar en la onda para cambiarla
+    //el selector de nombre esta desactivadp
     cardCanvas.addEventListener("click",()=>{
         //cuidado con estas dimensiones
         let wave = controller.getWave(cardParam.value);
+        let nameSelector = document.querySelector("#waveName");
+        nameSelector.setAttribute("disabled",true);
+        console.log(cardParam.value);
+        console.log(wave);
+        loadPreviewWave(wave);
         //loadWaveDialog(wave);
     })
+
+
 
     //evento para mostrar o no la onda.
     checkbox.addEventListener("click",()=>{
