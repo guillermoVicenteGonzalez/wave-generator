@@ -31,6 +31,14 @@ Tambien hay que empezar a pensar en escalas y hacerlo todo realista. Una frecuen
     - rehacer de modo que el parametro de las cards sea un id
       - darle campo id a las cards y hacer que las keys del mapa sean ids
 
+# Por hacer 2
+ - [ ] suma de ondas "bien", no sumando formulas y ya
+ - [ ] cambiar los botones de sitio
+ - [ ] dar estilo en general
+ - [ ] boton de pausa
+ - [ ] canvas grid etc con dimensiones
+ - [ ] animacion de onda. al darle al play.
+
 ### Notas
 investigar bien como funcionan las dimensiones de los canvas. Tal y como lo tengo deberia funcionar pero el canvas no se ajusta bien
 
