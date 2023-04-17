@@ -53,7 +53,10 @@ auxBtn.addEventListener("click",()=>{
 //boton de aceptar del dialog => crea una onda
 
 acceptWaveBtn.addEventListener("click",()=>{
-
+    if(waveName.value == undefined || waveName.value == ""){
+        alert("missing wave name");
+        return undefined;
+    }
     previewWave.setName(waveName.value);
     let exists = controller.getWave(previewWave.getName());
     if(exists){

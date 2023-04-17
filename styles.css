@@ -16,10 +16,13 @@ body{
 
 #controlPanel{
     border-right: .5px solid #000;
+    text-align: center;
+    overflow: auto;
 }
 
 
 #canvasContainer{
+    overflow: hidden;
     object-fit: cover;
     position: relative;
     width: 100%;
