@@ -145,6 +145,7 @@ function createWaveCard(wave){
     let waveName = tempNode.querySelector("label");
     let cardColumn = tempNode.querySelector(".cardMidColumn");
     let plusBtn = tempNode.querySelector(".plusBtn");
+    let deleteBtn = tempNode.querySelector(".deleteWaveBtn");
 
     //faltan verificaciones
 
@@ -190,7 +191,14 @@ function createWaveCard(wave){
     //evento para sumar ondas
     plusBtn.addEventListener("click",()=>{
         console.log("adding waves...");
-        wave.drawWaveSum(wave.canvas,waves.get("josefa"));
+
+    })
+
+    //evento para borrar la onda
+    deleteBtn.addEventListener("click",()=>{
+        controller.deleteWave(wave.getName());
+        wave.clearCanvas();
+        tempNode.remove();
     })
 
 

@@ -88,6 +88,19 @@ export function updateWave(wave){
 
 export function deleteWave(name){
     //busco la onda en la coleccion
+    if(!name){
+        console.error("deleteWave: no name specified");
+        return undefined;
+    }
+
+    let result = waves.get(name);
+    if(result){
+        waves.delete(name);
+        return result;
+    }else{
+        console.error("couldnt find wave with name: " + name);
+        return undefined;
+    }
 
     //la saco de la coleccion
 
