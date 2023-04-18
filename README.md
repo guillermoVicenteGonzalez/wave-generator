@@ -38,6 +38,8 @@ Tambien hay que empezar a pensar en escalas y hacerlo todo realista. Una frecuen
  - [ ] boton de pausa
  - [ ] canvas grid etc con dimensiones
  - [ ] animacion de onda. al darle al play.
+ - [ ] responsive
+ - [ ] clear all (cards, canvas, waves, etc)
 
 ### Notas
 investigar bien como funcionan las dimensiones de los canvas. Tal y como lo tengo deberia funcionar pero el canvas no se ajusta bien

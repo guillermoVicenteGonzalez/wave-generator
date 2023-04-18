@@ -22,6 +22,11 @@ var tempWaveCard = document.querySelector("div[data-type='template']");
 var dialogParam = document.querySelector("#dialogParam");
 var closeWaveDialog = document.querySelector(".closeModal");
 
+//list dialog
+var listDialog = document.querySelector("#waveListDialog");
+var listContainer = document.querySelector("#listContainer");
+var closeListBtn = document.querySelector("#closeListBtn");
+
 //start
 controller.addCanvas(previewCanvas, mainCanvas);
 
@@ -31,6 +36,7 @@ controller.addCanvas(previewCanvas, mainCanvas);
  **********************/
 //boton de abrir el dialogo etc...
 newWaveBtn.addEventListener("click",()=>{
+    console.log("new Wave");
     waveName.value = "";
     waveName.disabled = false;
     waveDialog.showModal();
@@ -41,8 +47,15 @@ newWaveBtn.addEventListener("click",()=>{
 
 //boton auxiliar
 auxBtn.addEventListener("click",()=>{
+    console.log("aux");
     let list = controller.getWaveCollection();
     console.log(list);
+    list.forEach(element =>{
+        console.log(element);
+        createWaveListItem(element.name);
+    });
+
+    listDialog.showModal();
 })
 
 
@@ -87,6 +100,18 @@ amplitudeSlider.addEventListener("input",redrawPreviewWave);
 colorSelector.addEventListener("change",redrawPreviewWave);
 
 /**********************
+ * List dialog events
+ **********************/
+
+closeListBtn.addEventListener("click",()=>{
+    let elements = listContainer.childNodes;
+    elements.forEach(element => {
+        element.remove();
+    });
+    listDialog.close();
+});
+
+/**********************
  * Other view functions
  **********************/
 
@@ -115,6 +140,22 @@ function loadPreviewWave(wave){
     previewWave.drawWave(previewCanvas);
     waveDialog.showModal();
 }
+
+function createWaveListItem(name){
+    let tempDiv = document.createElement("div");
+    let tempText = document.createElement("p");
+    let tempBtn = document.createElement("button");
+
+    tempText.innerHTML = name;
+    tempBtn.class = "customBtn";
+    tempBtn.innerHTML = "add wave";
+    tempDiv.append(tempText, tempBtn);
+    tempDiv.className = "listElement";
+    tempDiv.style = "border-bottom: .5px solid #000;"
+    listContainer.append(tempDiv);
+}
+
+
 
 /**********************
  * Complementary functions
@@ -191,7 +232,8 @@ function createWaveCard(wave){
     //evento para sumar ondas
     plusBtn.addEventListener("click",()=>{
         console.log("adding waves...");
-
+        let auxWave = controller.getWave("josefa");
+        wave.drawWaveSum(wave.canvas,auxWave);
     })
 
     //evento para borrar la onda

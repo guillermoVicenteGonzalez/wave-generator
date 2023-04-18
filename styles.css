@@ -15,6 +15,14 @@ body{
 }
 
 #controlPanel{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    padding: 5px;
+    z-index: 1; /* para que aparezca por encima*/
+}
+
+#cardContainer{
     border-right: .5px solid #000;
     text-align: center;
     overflow: auto;
@@ -46,6 +54,35 @@ body{
     text-align: center;
     vertical-align: middle;
 }
+
+/*******************
+* Wave list dialog
+********************/
+
+#waveListDialog{
+    text-align: center;
+    width: 700px;
+    max-height: 700px;
+    overflow: hidden;
+
+}
+
+
+
+#closeListBtn{
+    overflow: hidden;
+}
+
+.listElement{
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+}
+
+.listElement > *{
+
+}
+
 
 /*******************
 * Canvas Stuff

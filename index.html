@@ -9,13 +9,12 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div id="controlPanel">
+        <button id="newWaveBtn" class="customBtn">new wave</button>
+        <button id="auxBtn" class="customBtn">Aux</button>
+    </div>
 
     <content class="gridContainer">
-        <div id="controlPanel">
-            <button id="newWaveBtn" class="customBtn">new wave</button>
-            <button id="auxBtn" class="customBtn">Aux</button>
-
             <div id="cardContainer">
                 <!--Wave cards-->
                 <div class="waveCard" style="display: none" data-type="template">
@@ -34,7 +33,7 @@
                     <div class="playBtn"></div>
                 </div>
             </div>
-        </div>
+
         
         <div id="canvasContainer">
             <canvas class="canvas bigCanvas" id="mainCanvas"></canvas>
@@ -59,6 +58,13 @@
                 <button class="closeModal customBtn">close</button>
             </div>
         </div>
+    </dialog>
+
+    <dialog id="waveListDialog" class="card">
+        <div id="listContainer">
+
+        </div>
+        <button id="closeListBtn" class="customBtn">Close</button>
     </dialog>
 
 </body>
