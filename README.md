@@ -2,6 +2,9 @@
 Sencillo simulador de ondas senoidales para uso educativo. 
 El simulador permite (permitirá) generar ondas senoidales parametrizables. Manejar sus atributos (frecuencia y amplitud), reproducir su sonido, fusionarlas con otras ondas etc.
 
+# Sin wave generator
+This projects consists of a sin wave plotter made with plain html +css + javascript. You can create and manipulate sin waves and their properties as well as sum them up to create new Waves.
+
 # Importante
 Hay que refactorizar todo el codigo. Que sea codigo espagueti va a complicar todo mucho.
 
