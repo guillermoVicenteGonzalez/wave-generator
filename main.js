@@ -34,15 +34,16 @@ controller.addCanvas(previewCanvas, mainCanvas);
 /**********************
  * Main page events
  **********************/
+
 //boton de abrir el dialogo etc...
 newWaveBtn.addEventListener("click",()=>{
     console.log("new Wave");
-    waveName.value = "";
     waveName.disabled = false;
-    waveDialog.showModal();
+
     resizeCanvas(previewCanvas);
-    previewWave = new Wave(50,1,"#0000ff","");
-    previewWave.drawWave(previewCanvas,2);
+    let tempWave = new Wave(50,1,"#0000ff","");
+    loadPreviewWave(tempWave);
+   // previewWave.drawWave(previewCanvas,2);
 });
 
 //boton auxiliar
@@ -134,11 +135,12 @@ function loadPreviewWave(wave){
     frequencySlider.value = previewWave.getFrequency();
     colorSelector.value = previewWave.getColor();
     waveName.value = previewWave.getName();
-    previewWave.drawWave(previewCanvas,2);
 
+    waveDialog.showModal();    
+    resizeCanvas(previewCanvas)
     clearCanvas(previewCanvas);
     previewWave.drawWave(previewCanvas);
-    waveDialog.showModal();
+
 }
 
 function createWaveListItem(wave){
