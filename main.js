@@ -2,7 +2,7 @@ import {Wave} from "./Wave.js"
 import * as controller from "./controller.js";
 
 //variables
-var previewWave = new Wave(100,2,"#0000ff","");;
+var previewWave = new Wave(100,2,"#0000ff","");
 
 //elements
 var newWaveBtn = document.querySelector("#newWaveBtn");
@@ -56,7 +56,7 @@ auxBtn.addEventListener("click",()=>{
     });
 
     listDialog.showModal();
-})
+});
 
 
 /**********************
@@ -87,13 +87,13 @@ acceptWaveBtn.addEventListener("click",()=>{
     nWave.drawWave();
     waveDialog.close();
 
-})
+});
 
 
 
 closeWaveDialog.addEventListener("click",()=>{
     waveDialog.close();
-})
+});
 
 frequencySlider.addEventListener("input",redrawPreviewWave);
 amplitudeSlider.addEventListener("input",redrawPreviewWave);
@@ -141,21 +141,38 @@ function loadPreviewWave(wave){
     waveDialog.showModal();
 }
 
-function createWaveListItem(name){
+function createWaveListItem(wave){
     let tempDiv = document.createElement("div");
     let tempText = document.createElement("p");
     let tempBtn = document.createElement("button");
+    let name = wave.getName();
 
     tempText.innerHTML = name;
     tempBtn.class = "customBtn";
     tempBtn.innerHTML = "add wave";
+
+    tempBtn.addEventListener("click",()=>{
+        previewWave.clearCanvas();
+        previewWave.drawWaveSum(previewWave.canvas, wave);
+        listDialog.close();
+    });
+
     tempDiv.append(tempText, tempBtn);
     tempDiv.className = "listElement";
     tempDiv.style = "border-bottom: .5px solid #000;"
     listContainer.append(tempDiv);
 }
 
+function initializeListDialog(){
+    let list = controller.getWaveCollection();
+    console.log(list);
+    list.forEach(element =>{
+        console.log(element);
+        createWaveListItem(element);
+    });
 
+    listDialog.showModal();
+}
 
 /**********************
  * Complementary functions
@@ -232,8 +249,9 @@ function createWaveCard(wave){
     //evento para sumar ondas
     plusBtn.addEventListener("click",()=>{
         console.log("adding waves...");
-        let auxWave = controller.getWave("josefa");
-        wave.drawWaveSum(wave.canvas,auxWave);
+        previewWave = wave;
+        initializeListDialog();
+        //wave.drawWaveSum(wave.canvas,auxWave);
     })
 
     //evento para borrar la onda
