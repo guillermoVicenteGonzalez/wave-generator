@@ -10,6 +10,7 @@ var auxBtn = document.querySelector("#auxBtn");
 var waveDialog = document.querySelector("#waveDialog");
 var mainCanvas = document.querySelector("#mainCanvas");
 var canvasContainer = document.querySelector("#canvasContainer")
+var clearAllBtn = document.querySelector("#clearBtn");
 
 //dialog elements
 var frequencySlider = document.querySelector("#frequency-slider");
@@ -57,6 +58,12 @@ auxBtn.addEventListener("click",()=>{
     });
 
     listDialog.showModal();
+});
+
+//boton de borrar todo
+clearAllBtn.addEventListener("click",()=>{
+    console.log("clearing");
+    controller.clearAllWaves();
 });
 
 
@@ -179,6 +186,10 @@ function initializeListDialog(){
 /**********************
  * Complementary functions
  **********************/
+
+function clearAll(){
+
+}
 
 function clearCanvas(canvas){
     if(canvas.nodeName != 'CANVAS'){

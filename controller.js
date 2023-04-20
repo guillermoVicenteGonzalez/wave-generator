@@ -190,6 +190,22 @@ export function createWaveCard(wave){
     return tempNode;
 }
 
+export function clearAllWaves(){
+    waves.forEach(element => {
+        if(element instanceof Wave){
+            element.clearWave();
+            waves.delete(element.getName());
+        }
+    });
+
+    /*
+    canvasCollection.forEach(element =>{
+        element.remove();
+    });
+
+    canvasCollection = new Array();*/
+}
+
 /**********************
  * Non export functions
  **********************/

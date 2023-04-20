@@ -241,6 +241,11 @@ class Wave{
     animateWave(){
         
     }
+
+    clearWave(){
+        this.card.remove();
+        this.canvas.remove();
+    }
 }
 
 export {Wave};

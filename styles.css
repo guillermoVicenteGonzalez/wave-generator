@@ -63,14 +63,6 @@ body{
     text-align: center;
     width: 700px;
     max-height: 700px;
-    overflow: hidden;
-
-}
-
-
-
-#closeListBtn{
-    overflow: hidden;
 }
 
 .listElement{
@@ -79,8 +71,8 @@ body{
     display: flex;
 }
 
-.listElement > *{
-
+#listBtnArea{
+    overflow: hidden;
 }
 
 
