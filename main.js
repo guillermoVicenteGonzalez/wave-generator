@@ -106,10 +106,7 @@ colorSelector.addEventListener("change",redrawPreviewWave);
  **********************/
 
 closeListBtn.addEventListener("click",()=>{
-    let elements = listContainer.childNodes;
-    elements.forEach(element => {
-        element.remove();
-    });
+    clearListDialog();
     listDialog.close();
 });
 
@@ -157,6 +154,7 @@ function createWaveListItem(wave){
     tempBtn.addEventListener("click",()=>{
         previewWave.clearCanvas();
         previewWave.drawWaveSum(previewWave.canvas, wave);
+        clearListDialog();
         listDialog.close();
     });
 
@@ -169,11 +167,9 @@ function createWaveListItem(wave){
 function initializeListDialog(){
     let list = controller.getWaveCollection();
     console.log(list);
-    let children = listContainer.children;
-    console.log(children);
-    for(let i=0;i<children.length;i++){
-        children[i].remove();
-    }
+
+    clearListDialog();
+
 
     list.forEach(element =>{
         console.log(element);
@@ -181,6 +177,14 @@ function initializeListDialog(){
     });
 
     listDialog.showModal();
+}
+
+function clearListDialog(){
+    let children = listContainer.children;
+
+    for(let i=0;i<children.length;i++){
+        listContainer.removeChild(children[i]);
+    }
 }
 
 /**********************
