@@ -30,6 +30,7 @@ var closeListBtn = document.querySelector("#closeListBtn");
 
 //start
 controller.addCanvas(previewCanvas, mainCanvas);
+intializeCanvas();
 
 
 /**********************
@@ -50,19 +51,12 @@ newWaveBtn.addEventListener("click",()=>{
 //boton auxiliar
 auxBtn.addEventListener("click",()=>{
     console.log("aux");
-    let list = controller.getWaveCollection();
-    console.log(list);
-    list.forEach(element =>{
-        console.log(element);
-        createWaveListItem(element.name);
-    });
-
-    listDialog.showModal();
+    let wave = controller.getWave("josefa");
+    wave.animateWave();
 });
 
 //boton de borrar todo
 clearAllBtn.addEventListener("click",()=>{
-    console.log("clearing");
     controller.clearAllWaves();
 });
 
@@ -175,6 +169,12 @@ function createWaveListItem(wave){
 function initializeListDialog(){
     let list = controller.getWaveCollection();
     console.log(list);
+    let children = listContainer.children;
+    console.log(children);
+    for(let i=0;i<children.length;i++){
+        children[i].remove();
+    }
+
     list.forEach(element =>{
         console.log(element);
         createWaveListItem(element);
@@ -332,6 +332,18 @@ function showAxes(ctx,axes) {
     
     ctx.stroke();
     //ctx.save();
+}
+
+function showGrid(){
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+
+    for(let i=0; i<3;i++){
+        ctx.beginPath();
+        ctx.strokeStyle = "rgb(128,128,128)";
+
+        ctx.moveTo(i,0)
+    }
 }
 //let canvas = document.getElementById("mainCanvas");
 //resizeCanvas(canvas);

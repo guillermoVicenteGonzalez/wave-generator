@@ -96,7 +96,7 @@ class Wave{
         var y = 0;
         
         while (x < width) {
-            y = height/2 + this.amplitude * Math.sin(x * frec);
+            y = height/2 + this.amplitude * Math.sin(x  * frec);
             ctx.lineTo(x, y);
             x++;
         }
@@ -239,7 +239,14 @@ class Wave{
     }
 
     animateWave(){
-        
+        var step =2;
+        for(;;){
+            console.log(step);
+            this.clearCanvas(this.canvas);
+            step +=10;
+            this.drawWave(this.canvas,2,step)
+            window.requestAnimationFrame(this.animateWave);
+        }
     }
 
     clearWave(){

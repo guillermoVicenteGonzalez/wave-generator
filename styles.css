@@ -15,9 +15,18 @@ body{
 }
 
 #controlPanel{
-    position: absolute;
+    width: 95%;
+    height: 45px;
+    /*background-image: linear-gradient(to right, rgb(218, 218, 218) , rgb(145, 158, 158),  rgb(218, 218, 218));
+    */
+    background-image: linear-gradient(to right, rgb(156, 156, 156), rgb(116, 115, 115), rgb(156, 156, 156));
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     bottom: 10px;
     left: 50%;
+    transform: translate(-50%);
+    position: fixed;
     padding: 5px;
     z-index: 1; /* para que aparezca por encima*/
 }
